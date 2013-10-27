@@ -36,6 +36,7 @@ class ClosestPairSpec(unittest.TestCase):
         rand_pair = lambda: (randint(-10000,10000), randint(-10000,10000))
         self.a_case = [rand_pair() for _ in xrange(randrange(2,100))]
         self.b_case = [rand_pair() for _ in xrange(randrange(101,500))]
+        self.c_case = [rand_pair() for _ in xrange(randrange(501,1000))]
 
     def test_a_closest_pair(self):
         (dcp,dcq),dcd = pyclops.closest_pair(self.a_case)
@@ -48,6 +49,14 @@ class ClosestPairSpec(unittest.TestCase):
     def test_b_closest_pair(self):
         (dcp,dcq),dcd = pyclops.closest_pair(self.b_case)
         (bfp,bfq),bfd = pyclops.brute_force_closest_pair(self.b_case)
+        self.assertEqual(dcd,bfd)
+        same = (dcp == bfp and dcq == bfq)
+        swap = (dcp == bfq and dcq == bfp)
+        self.assertTrue(same or swap)
+
+    def test_c_closest_pair(self):
+        (dcp,dcq),dcd = pyclops.closest_pair(self.c_case)
+        (bfp,bfq),bfd = pyclops.brute_force_closest_pair(self.c_case)
         self.assertEqual(dcd,bfd)
         same = (dcp == bfp and dcq == bfq)
         swap = (dcp == bfq and dcq == bfp)

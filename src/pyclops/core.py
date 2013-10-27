@@ -18,10 +18,11 @@ def distance(p,q):
 # between p and q.
 #
 def brute_force_closest_pair(points):
-    assert(len(points) > 1)
+    n_points = len(points)
+    if n_points <= 1: return (None,None),MAXINT
     results = [((points[i],points[j]), distance(points[i],points[j]))
-               for i in xrange(len(points))
-               for j in xrange(i+1,len(points))]
+               for i in xrange(n_points)
+               for j in xrange(i+1,n_points)]
     results.sort(key=lambda (_,distance): distance)
     return results[0]
 
