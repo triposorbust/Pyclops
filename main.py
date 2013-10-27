@@ -5,7 +5,7 @@ import src.pyclops.core as pyclops
 
 def main(filename):
     with open(filename, 'r') as f:
-        points = [l.split() for l in f if l.strip()]
+        points = [tuple(map(int, l.split())) for l in f if not l.strip() == ""]
         pair,d = pyclops.closest_pair(points)
     p,q = pair
     print("(x1,y1) = ({0},{1})".format(p[0],p[1]))
